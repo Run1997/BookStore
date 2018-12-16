@@ -1,0 +1,13 @@
+/* CSS Document */
+body{ text-align:center;}
+#top{ width:100%; margin:0px; padding:0px;}
+#center{padding-top:90px;}
+#bottom{ width:100%; background:#F03;position:absolute;left:0;bottom:0;}
+.regiter{ }
+#big{background:url(../img/456.jpg);background-repeat:no-repeat ;
+
+background-size:100% 100%; 
+
+background-attachment: fixed; height:100%;}
+
+.form_gender{ font-size:15px; margin-top:10px; margin-bottom:-5px;text-align:left; margin-left:29px; margin-right:29px;}

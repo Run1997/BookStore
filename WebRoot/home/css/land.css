@@ -1,0 +1,15 @@
+/* CSS Document */
+body{ text-align:center; background:url(../img/456.jpg);background-repeat:no-repeat ;
+
+background-size:100% 100%; 
+
+background-attachment: fixed}
+#top{ width:100%; margin:0px; padding:0px;}
+#land{ padding-top:70px; }
+#land p{ color:#F00; font-size:30px;}
+#bottom{ width:100%; background:#F03;position:absolute;left:0;bottom:0;}
+#big{background:url(../img/456.jpg);background-repeat:no-repeat ;
+
+background-size:100% 100%; 
+
+background-attachment: fixed; height:100%;}
