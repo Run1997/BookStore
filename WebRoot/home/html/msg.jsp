@@ -22,7 +22,7 @@
 <ul>
   <li><a href="${pageContext.request.contextPath}/home.jsp">主页</a></li>
   <li><a href="${pageContext.request.contextPath}/home/html/login.jsp">登录</a></li>
-  <li><a href="${pageContext.request.contextPath}/home/html/regist.jsp>">注册</a></li>
+  <li><a href="${pageContext.request.contextPath}/home/html/regist.jsp">注册</a></li>
 </ul>
   </body>
   </body>
