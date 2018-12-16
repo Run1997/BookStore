@@ -1,7 +1,11 @@
 package sise.bookstore.Servlet;
 
 import java.io.IOException;
+
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,6 +14,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import sise.bookstore.DAO.UserDao;
+import sise.bookstore.Exception.UserException;
+import sise.bookstore.Util.CommonUtils;
+import sise.bookstore.Util.MD5Util;
+import sise.bookstore.bean.User;
+
 
 public class RegServlet extends HttpServlet {
 
@@ -26,9 +37,11 @@ public class RegServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String repassword = request.getParameter("repassword");
-		String gender = request.getParameter("gender");
+		//String gender = request.getParameter("gender");
 		String email = request.getParameter("email");
-		String telephone = request.getParameter("telephone");
+		//String telephone = request.getParameter("telephone");
+		// 封装表单数据
+		User form = CommonUtils.toBean(request.getParameterMap(), User.class);
 		// 使用Map校验表单数据
 		Map<String, String> errors = new HashMap<String, String>();
 		// 验证用户名
@@ -46,7 +59,7 @@ public class RegServlet extends HttpServlet {
 		//验证密码重复
 		if (repassword == null || repassword.trim().isEmpty()) {
 			errors.put("repassword", "密码不能为空");
-		} else if (password!=repassword) {
+		} else if (!password.equals(repassword)) {
 			errors.put("repassword", "两次密码不同。");
 		}
 		
@@ -65,6 +78,50 @@ public class RegServlet extends HttpServlet {
 			// 转发到注册页面
 			RequestDispatcher rd=request.getRequestDispatcher("./home/html/register.jsp");
 			rd.forward(request, response);
+		}
+		
+		UserDao userDao=new UserDao();
+		try {
+			//检查用户名是否已被注册
+			if (userDao.findUserByUsername(form.getUsername()) != null) {
+				throw new UserException("用户名已被注册");
+			}
+			//检查邮箱是否已被注册
+			if (userDao.findUserByEmail(form.getEmail()) != null) {
+				throw new UserException("邮箱已被注册");
+			}
+		} catch (UserException e) {
+			// 保存出错信息
+			request.setAttribute("msg", e.getMessage());
+			//request.setAttribute("form", form);
+			// 转发到注册页面
+			RequestDispatcher rd=request.getRequestDispatcher("./home/html/register.jsp");
+			rd.forward(request, response);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// 向数据库中添加用户信息
+		try {
+			//设置注册时间
+			SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String time = sd.format(new Date());
+			form.setRegistTime(time);
+			//密码加密
+			form.setPassword(MD5Util.MD5Encode(form.getPassword()));
+			//设置为普通用户
+			form.setRole("普通用户");
+			//加入数据库
+			userDao.insert(form);
+			request.setAttribute("form", form);
+			// 转发到激活页面
+			RequestDispatcher rd=request.getRequestDispatcher("./home/html/Activate.jsp");
+			rd.forward(request, response);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 

@@ -1,6 +1,6 @@
 package sise.bookstore.bean;
 
-import java.sql.Timestamp;
+
 
 public class User {
 	public String username;
@@ -12,7 +12,7 @@ public class User {
 	public String activeCode;
 	public int state;
 	public String role;
-	public String registTime;//Timestamp
+	public String registTime;//String
 	public User(String username, String password, String gender, String email, String telephone, String introduce,
 			String activeCode, int state, String role, String registTime) {
 		super();

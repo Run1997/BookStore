@@ -62,7 +62,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<input name="username" type="text" placeholder="用户名">
 	</div>
 	<div class="ececk_warning"><span>${errors.username}</span></div>
-    
     <div class="form_gender">
     <span id="">&nbsp;性别：</span>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -93,6 +92,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             
 							
     <div class="form_btn">
+    <div class="ececk_warning"><span>${msg}</span></div>
 	<input type="submit" value="注册">
 	</div>
 	<div class="form_reg_btn">

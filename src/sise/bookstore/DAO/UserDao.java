@@ -40,12 +40,21 @@ public class UserDao {
 		return user;
 
 	}
+	// 根据用户名查询
+	public User findUserByUsername(String username) throws SQLException {
 
+		String sql = "select * from user where username=?";
+		User user = runner.query(sql, new BeanHandler<User>(User.class), username);
+		return user;
+
+	}
 	// 设置激活码
 	public void updateActiveCode(User user) throws SQLException {
 
 		String sql = "update user set activeCode=? where username=?";
 		runner.update(sql, user.getActiveCode(), user.getUsername());
 	}
+	
+	
 
 }
