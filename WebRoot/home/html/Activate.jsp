@@ -19,10 +19,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
+<style>
+function sendMail
+</style>
   </head>
   
   <body>
-    <h1>亲爱的${form.username}，恭喜您注册成功！请立即激活您的账号：<a href="">激活</a></h1><br>
+    <h1>亲爱的${form.username}，恭喜您注册成功！我们已经发送一封激活邮件到您的${form.email}邮箱,请立即前往邮箱激活您的账号,谢谢！</h1><br>
   </body>
 </html>

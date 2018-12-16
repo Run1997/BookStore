@@ -3,12 +3,15 @@ package sise.bookstore.Servlet;
 import java.io.IOException;
 
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import sise.bookstore.DAO.UserDao;
 import sise.bookstore.Exception.UserException;
+import sise.bookstore.Mail.MailUtil;
 import sise.bookstore.Util.CommonUtils;
 import sise.bookstore.Util.MD5Util;
 import sise.bookstore.bean.User;
@@ -103,7 +107,7 @@ public class RegServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		// 向数据库中添加用户信息
+		// 注册：向数据库中添加用户信息
 		try {
 			//设置注册时间
 			SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -113,13 +117,26 @@ public class RegServlet extends HttpServlet {
 			form.setPassword(MD5Util.MD5Encode(form.getPassword()));
 			//设置为普通用户
 			form.setRole("普通用户");
-			//加入数据库
+			//发生激活邮件。
+			MailUtil.activateMail(form);
+			//将用户信息加入数据库
 			userDao.insert(form);
-			request.setAttribute("form", form);
+			
+			//request.setAttribute("form", errors);
 			// 转发到激活页面
-			RequestDispatcher rd=request.getRequestDispatcher("./home/html/Activate.jsp");
+			RequestDispatcher rd=request.getRequestDispatcher("./home/html/Activate.jsp?username="+username+"&email="+email);
 			rd.forward(request, response);
+			
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (AddressException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (MessagingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
