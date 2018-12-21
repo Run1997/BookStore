@@ -13,9 +13,10 @@
     <servlet-name>UserActivate</servlet-name>
     <servlet-class>sise.bookstore.Servlet.UserActivate</servlet-class>
   </servlet>
-
-
-
+  <servlet>
+    <servlet-name>ProductsCategory</servlet-name>
+    <servlet-class>sise.bookstore.Servlet.ProductsCategory</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>ActivateMail</servlet-name>
     <url-pattern>/ActivateMail</url-pattern>
@@ -28,6 +29,10 @@
     <servlet-name>UserActivate</servlet-name>
     <url-pattern>/UserActivate</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ProductsCategory</servlet-name>
+    <url-pattern>/ProductsCategory</url-pattern>
+  </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
@@ -36,12 +41,13 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-    <filter>
-        <filter-name>CharacterFilter</filter-name>
-        <filter-class>sise.bookstore.Filter.CharacterFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>CharacterFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+  <filter>
+    <filter-name>CharacterFilter</filter-name>
+    <filter-class>sise.bookstore.Filter.CharacterFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>CharacterFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+        <servlet-name>ProductsCategory</servlet-name>
+  </filter-mapping>
 </web-app>

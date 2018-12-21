@@ -2,6 +2,12 @@ package sise.bookstore.Filter;
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
+/**  
+* <p>Title: CharacterFilter</p>  
+* <p>Description:处理中文乱码 </p>  
+* @author 
+* @date 2018年12月21日  
+*/  
 public class CharacterFilter implements Filter {
 	public void init(FilterConfig filterConfig) throws ServletException {
 	}

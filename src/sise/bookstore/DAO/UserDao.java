@@ -7,6 +7,13 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 
 import sise.bookstore.bean.User;
 
+
+/**  
+* <p>Title: UserDao</p>  
+* <p>Description:User的数据库操作类。 </p>  
+* @author Run 
+* @date 2018年12月21日  
+*/  
 public class UserDao {
 	private QueryRunner runner = new QueryRunner(JDBCUtils.getDataSource());
 

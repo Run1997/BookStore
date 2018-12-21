@@ -1,56 +1,50 @@
 package sise.bookstore.Servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import sise.bookstore.DAO.UserDao;
-import sise.bookstore.bean.User;
-
+import sise.bookstore.DAO.ProductsDao;
 /**  
-* <p>Title: ActivateMail</p>  
-* <p>Description: 用户激活</p>  
+* <p>Title: ProductDetail</p>  
+* <p>Description:查詢图书设置到请求上后转发到 ProductDetail.jsp页面</p>  
 * @author Run 
 * @date 2018年12月21日  
 */  
-public class ActivateMail extends HttpServlet {
+@WebServlet("/ProductDetail")
+public class ProductDetail extends HttpServlet {
+
+
+	private static final long serialVersionUID = 1L;
 
 	public void destroy() {
 		super.destroy(); // Just puts "destroy" string in log
 		// Put your code here
 	}
-
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		String email=request.getParameter("email");
-		String activeCode=request.getParameter("token");
-		UserDao userDao=new UserDao();
+		ProductsDao productsDao=new ProductsDao();
+		//查询单个图书
+		int Pid=Integer.parseInt(request.getParameter("Pid"));
 		try {
-			User user=userDao.findUserByEmail(email);
-			if(user.getActiveCode().equals(activeCode)){
-				userDao.updateState(email, 1);
-				request.setAttribute("msg", "账号激活成功，立即登陆！");
-			}else{
-				request.setAttribute("msg", "账号激活失败，请重新注册！");
-			}
+			request.setAttribute("product", productsDao.findOne(Pid));
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		RequestDispatcher rd=request.getRequestDispatcher("home/html/msg.jsp");
+		RequestDispatcher rd=request.getRequestDispatcher("home/html/ProductDetail.jsp");
 		rd.forward(request, response);
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		doGet(request, response);
 	}
-
 
 	public void init() throws ServletException {
 		// Put your code here

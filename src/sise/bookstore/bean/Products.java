@@ -1,13 +1,14 @@
 package sise.bookstore.bean;
 
 public class Products {
+	public int id;
 	public String name;
 	public double price;
-	public String category;
+	public int category;
 	public int pnum;
 	public String imgurl;
 	public String description;
-	public Products(String name, double price, String category, int pnum, String imgurl, String description) {
+	public Products(String name, double price, int category, int pnum, String imgurl, String description) {
 		super();
 		this.name = name;
 		this.price = price;
@@ -18,6 +19,12 @@ public class Products {
 	}
 	public Products() {
 		
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getName() {
 		return name;
@@ -31,10 +38,10 @@ public class Products {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	public String getCategory() {
+	public int getCategory() {
 		return category;
 	}
-	public void setCategory(String category) {
+	public void setCategory(int category) {
 		this.category = category;
 	}
 	public int getPnum() {

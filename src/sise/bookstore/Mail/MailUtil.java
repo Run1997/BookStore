@@ -15,6 +15,12 @@ import javax.mail.internet.MimeMessage;
 import sise.bookstore.Util.MD5Util;
 import sise.bookstore.bean.User;
 
+/**  
+* <p>Title: MailUtil</p>  
+* <p>Description:邮件处理类，包含邮箱的参数设置和邮件发送。 </p>  
+* @author Run 
+* @date 2018年12月21日  
+*/  
 public class MailUtil {
 	 public static final String FROM = "44014815@qq.com";//发件人的email
 

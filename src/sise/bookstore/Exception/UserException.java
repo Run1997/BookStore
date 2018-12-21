@@ -1,5 +1,11 @@
 package sise.bookstore.Exception;
 
+/**  
+* <p>Title: UserException</p>  
+* <p>Description:User异常类 </p>  
+* @author Run 
+* @date 2018年12月21日  
+*/  
 public class UserException extends Exception{
 	public UserException(){
 		super();
