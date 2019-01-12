@@ -24,5 +24,6 @@
 		<property name="user">root</property>
 		<property name="password">123423529</property>
 		//hahah
+		//hahahhhh
 	</named-config>
 </c3p0-config>
